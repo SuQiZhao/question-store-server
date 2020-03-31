@@ -32,7 +32,7 @@ public class SpringBootPlusGenerator {
                 .setUserName("root")
                 .setPassword("root")
                 .setDriverName("com.mysql.jdbc.Driver")
-                .setDriverUrl("jdbc:mysql://localhost:3306/spring_boot_plus?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+                .setDriverUrl("jdbc:mysql://localhost:3306/question_store?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
 
 //        codeGenerator
 //                .setUserName("spring_boot_plus")
@@ -42,12 +42,12 @@ public class SpringBootPlusGenerator {
 
         // 包信息
         codeGenerator
-                .setProjectPackagePath("io/geekidea/springbootplus")
-                .setParentPackage("io.geekidea.springbootplus");
+                .setProjectPackagePath("com/suqizhao")
+                .setParentPackage("com.suqizhao");
 
         // 组件作者等配置
         codeGenerator
-                .setModuleName("temp")
+                .setModuleName("questionStore")
                 .setAuthor("sqizhao")
                 .setPkIdColumnName("cd_id");
 
@@ -84,7 +84,7 @@ public class SpringBootPlusGenerator {
         // 需要生成的表数组
         // xxx,yyy,zzz为需要生成代码的表名称
         String[] tables = {
-                "FOO_BAR"
+                "USER"
         };
 
         // 循环生成

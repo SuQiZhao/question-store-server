@@ -61,6 +61,16 @@ public class LoginController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+
+    @PostMapping("/login_v1_1")
+    @ApiOperation(value = "登陆", notes = "用户登陆接口", response = LoginSysUserTokenVo.class)
+    public ApiResult login_v1_1(@Validated @RequestBody LoginParam loginParam, HttpServletResponse response) throws Exception {
+        LoginSysUserTokenVo loginSysUserTokenVo = loginService.login(loginParam);
+        // 设置token响应头
+        response.setHeader(JwtTokenUtil.getTokenName(), loginSysUserTokenVo.getToken());
+        return ApiResult.okMap("token",loginSysUserTokenVo.getToken());
+    }
+
     @PostMapping("/login")
     @ApiOperation(value = "登陆", notes = "系统用户登陆", response = LoginSysUserTokenVo.class)
     public ApiResult login(@Validated @RequestBody LoginParam loginParam, HttpServletResponse response) throws Exception {

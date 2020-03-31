@@ -38,9 +38,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableConfigurationProperties
 @EnableAdminServer
-@MapperScan({"io.geekidea.springbootplus.**.mapper"})
+@MapperScan({"io.geekidea.springbootplus.**.mapper","com.suqizhao.questionStore"})
 @ServletComponentScan
-@SpringBootApplication(scanBasePackages = {"io.geekidea.springbootplus","com.example"})
+@SpringBootApplication(scanBasePackages = {"io.geekidea.springbootplus","com.example","com.suqizhao.questionStore"})
 public class SpringBootPlusApplication {
 
     public static void main(String[] args) {

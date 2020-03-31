@@ -44,6 +44,15 @@ public interface LoginService {
     LoginSysUserTokenVo login(LoginParam loginParam) throws Exception;
 
     /**
+     * 登陆
+     *
+     * @param loginParam
+     * @return
+     * @throws Exception
+     */
+    LoginSysUserTokenVo login_v1_1(LoginParam loginParam) throws Exception;
+
+    /**
      * 如果(当前时间+倒计时) > 过期时间，则刷新token
      * 并更新缓存
      * 当前token失效，返回新token

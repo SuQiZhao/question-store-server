@@ -269,10 +269,10 @@ spring:
 # swagger配置
 swagger:
   base:
-    package: io.geekidea.springbootplus;com.example
+    package: io.geekidea.springbootplus;com.example;com.suqizhao.questionStore
   contact:
-    email: geekidea@qq.com
-    name: geekidea
+    email: javasu@qq.com
+    name: javasu
     url: ''
   description: ''
   title: ${pom.artifactId}

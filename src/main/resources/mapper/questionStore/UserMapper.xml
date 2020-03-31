@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suqizhao.questionStore.mapper.UserMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cd_id, username, nickname, password, collage_name, major_name, email, telephone, gender, status, create_time, updated_time, login_time, delete_flag, user_level, salt
+    </sql>
+
+    <select id="getUserById" resultType="com.suqizhao.questionStore.vo.UserQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from user where cd_id = #{id}
+    </select>
+
+    <select id="getUserPageList" resultType="com.suqizhao.questionStore.vo.UserQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+
+</mapper>
