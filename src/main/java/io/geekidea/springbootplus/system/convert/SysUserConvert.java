@@ -16,8 +16,10 @@
 
 package io.geekidea.springbootplus.system.convert;
 
+import com.suqizhao.questionStore.entity.User;
 import io.geekidea.springbootplus.framework.shiro.vo.LoginSysUserRedisVo;
 import io.geekidea.springbootplus.framework.shiro.vo.LoginSysUserVo;
+import io.geekidea.springbootplus.framework.shiro.vo.UserRedisVo;
 import io.geekidea.springbootplus.system.entity.SysUser;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -48,6 +50,8 @@ public interface SysUserConvert {
      * @return
      */
     LoginSysUserRedisVo loginSysUserVoToLoginSysUserRedisVo(LoginSysUserVo loginSysUserVo);
+
+    UserRedisVo UserToUserRedisVo(User user);
 
 
 }

@@ -140,7 +140,7 @@ spring-boot-plus:
   ######################## Spring Shiro start ########################
   shiro:
     # 是否启用
-    enable: true
+    enable: false
     # shiro ini 多行字符串配置
     filter-chain-definitions: |
       /=anon

@@ -16,6 +16,7 @@
 
 package io.geekidea.springbootplus.framework.shiro.cache;
 
+import com.suqizhao.questionStore.entity.User;
 import io.geekidea.springbootplus.framework.shiro.jwt.JwtToken;
 import io.geekidea.springbootplus.framework.shiro.vo.LoginSysUserRedisVo;
 import io.geekidea.springbootplus.framework.shiro.vo.LoginSysUserVo;
@@ -36,6 +37,14 @@ public interface LoginRedisService {
      * @param loginSysUserVo
      */
     void cacheLoginInfo(JwtToken jwtToken, LoginSysUserVo loginSysUserVo);
+
+    /**
+     * 缓存登陆信息
+     *
+     * @param jwtToken
+     * @param user
+     */
+    void cacheLoginInfo_v1_1(JwtToken jwtToken, User user);
 
 
     /**

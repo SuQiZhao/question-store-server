@@ -18,8 +18,10 @@ package io.geekidea.springbootplus.framework.shiro.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.suqizhao.questionStore.entity.User;
+import com.suqizhao.questionStore.entity.req.UserLoginParam;
 import com.suqizhao.questionStore.mapper.UserMapper;
 import com.suqizhao.questionStore.service.UserService;
+import com.suqizhao.questionStore.vo.UserLoginTokenVo;
 import io.geekidea.springbootplus.framework.constant.CommonConstant;
 import io.geekidea.springbootplus.framework.constant.CommonRedisKey;
 import io.geekidea.springbootplus.framework.core.properties.SpringBootPlusProperties;
@@ -210,15 +212,15 @@ public class LoginServiceImpl implements LoginService {
         return loginSysUserTokenVo;
     }
 
-    public LoginSysUserTokenVo login_v1_1(LoginParam loginParam) throws Exception {
+    public UserLoginTokenVo login_v1_1(UserLoginParam userLoginParam) throws Exception {
         // 校验验证码
-        checkVerifyCode(loginParam.getVerifyToken(), loginParam.getCode());
+//        checkVerifyCode(loginParam.getVerifyToken(), loginParam.getCode());
 
-        String username = loginParam.getUsername();
+        String username = userLoginParam.getUsername();
         // 从数据库中获取登陆用户信息
         User user = userService.getUserByUsername(username);
         if (user == null) {
-            log.error("登陆失败,loginParam:{}", loginParam);
+            log.error("登陆失败,loginParam:{}", userLoginParam);
             throw new AuthenticationException("此用户不存在");
         }
         if (user.getStatus() == 1) {
@@ -229,47 +231,17 @@ public class LoginServiceImpl implements LoginService {
         // 原始密码明文：123456
         // 原始密码前端加密：sha256(123456)
         // 后台加密规则：sha256(sha256(123456) + salt)
-        String encryptPassword = PasswordUtil.encrypt(loginParam.getPassword(), sysUser.getSalt());
-        if (!encryptPassword.equals(sysUser.getPassword())) {
+//        String encryptPassword = PasswordUtil.encrypt(userLoginParam.getPassword(), user.getSalt());
+//        if (!encryptPassword.equals(user.getPassword())) {
+//            throw new AuthenticationException("用户名或密码错误");
+//        }
+
+        if (!userLoginParam.getPassword().equals(user.getPassword())) {
             throw new AuthenticationException("用户名或密码错误");
         }
 
-        // 将系统用户对象转换成登陆用户对象
-        LoginSysUserVo loginSysUserVo = SysUserConvert.INSTANCE.sysUserToLoginSysUserVo(sysUser);
-
-        // 获取部门
-        SysDepartment sysDepartment = sysDepartmentService.getById(sysUser.getDepartmentId());
-        if (sysDepartment == null) {
-            throw new AuthenticationException("部门不存在");
-        }
-        if (!StateEnum.ENABLE.getCode().equals(sysDepartment.getState())) {
-            throw new AuthenticationException("部门已禁用");
-        }
-        loginSysUserVo.setDepartmentId(sysDepartment.getId())
-                .setDepartmentName(sysDepartment.getName());
-
-        // 获取当前用户角色
-        Long roleId = sysUser.getRoleId();
-        SysRole sysRole = sysRoleService.getById(roleId);
-        if (sysRole == null) {
-            throw new AuthenticationException("角色不存在");
-        }
-        if (StateEnum.DISABLE.getCode().equals(sysRole.getState())) {
-            throw new AuthenticationException("角色已禁用");
-        }
-        loginSysUserVo.setRoleId(sysRole.getId())
-                .setRoleName(sysRole.getName())
-                .setRoleCode(sysRole.getCode());
-
-        // 获取当前用户权限
-        Set<String> permissionCodes = sysRolePermissionService.getPermissionCodesByRoleId(roleId);
-        if (CollectionUtils.isEmpty(permissionCodes)) {
-            throw new AuthenticationException("权限列表不能为空");
-        }
-        loginSysUserVo.setPermissionCodes(permissionCodes);
-
         // 获取数据库中保存的盐值
-        String newSalt = SaltUtil.getSalt(sysUser.getSalt(), jwtProperties);
+        String newSalt = SaltUtil.getSalt(user.getSalt(), jwtProperties);
 
         // 生成token字符串并返回
         Long expireSecond = jwtProperties.getExpireSecond();
@@ -284,19 +256,19 @@ public class LoginServiceImpl implements LoginService {
         subject.login(jwtToken);
 
         // 缓存登陆信息到Redis
-        loginRedisService.cacheLoginInfo(jwtToken, loginSysUserVo);
+        loginRedisService.cacheLoginInfo_v1_1(jwtToken, user);
         log.debug("登陆成功,username:{}", username);
 
 
         // 缓存登陆信息到redis
         String tokenSha256 = DigestUtils.sha256Hex(token);
-        redisTemplate.opsForValue().set(tokenSha256,loginSysUserVo,1, TimeUnit.DAYS);
+        redisTemplate.opsForValue().set(tokenSha256,user,1, TimeUnit.DAYS);
 
         // 返回token和登陆用户信息对象
-        LoginSysUserTokenVo loginSysUserTokenVo = new LoginSysUserTokenVo();
-        loginSysUserTokenVo.setToken(token);
-        loginSysUserTokenVo.setLoginSysUserVo(loginSysUserVo);
-        return loginSysUserTokenVo;
+        UserLoginTokenVo userLoginTokenVo = new UserLoginTokenVo();
+        userLoginTokenVo.setToken(token);
+        userLoginTokenVo.setUser(user);
+        return userLoginTokenVo;
     }
 
     @Override

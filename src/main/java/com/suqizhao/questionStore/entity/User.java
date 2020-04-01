@@ -31,7 +31,7 @@ public class User extends BaseEntity {
 
     @ApiModelProperty("唯一标识")
     @TableId(value = "cd_id", type = IdType.AUTO)
-private String cdId;
+    private String cdId;
 
     @ApiModelProperty("用户名")
     @NotBlank(message = "用户名不能为空")

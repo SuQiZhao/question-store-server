@@ -17,6 +17,8 @@
 package io.geekidea.springbootplus.framework.shiro.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.suqizhao.questionStore.entity.req.UserLoginParam;
+import com.suqizhao.questionStore.vo.UserLoginTokenVo;
 import io.geekidea.springbootplus.framework.common.api.ApiResult;
 import io.geekidea.springbootplus.framework.shiro.param.LoginParam;
 import io.geekidea.springbootplus.framework.shiro.service.LoginService;
@@ -63,12 +65,12 @@ public class LoginController {
 
 
     @PostMapping("/login_v1_1")
-    @ApiOperation(value = "登陆", notes = "用户登陆接口", response = LoginSysUserTokenVo.class)
-    public ApiResult login_v1_1(@Validated @RequestBody LoginParam loginParam, HttpServletResponse response) throws Exception {
-        LoginSysUserTokenVo loginSysUserTokenVo = loginService.login(loginParam);
+    @ApiOperation(value = "登陆", notes = "用户登陆接口", response = UserLoginTokenVo.class)
+    public ApiResult login_v1_1(@Validated @RequestBody UserLoginParam userLoginParam, HttpServletResponse response) throws Exception {
+        UserLoginTokenVo userLoginTokenVo = loginService.login_v1_1(userLoginParam);
         // 设置token响应头
-        response.setHeader(JwtTokenUtil.getTokenName(), loginSysUserTokenVo.getToken());
-        return ApiResult.okMap("token",loginSysUserTokenVo.getToken());
+        response.setHeader(JwtTokenUtil.getTokenName(), userLoginTokenVo.getToken());
+        return ApiResult.okMap("token",userLoginTokenVo.getToken());
     }
 
     @PostMapping("/login")

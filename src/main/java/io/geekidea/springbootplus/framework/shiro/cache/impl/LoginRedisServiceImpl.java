@@ -16,15 +16,13 @@
 
 package io.geekidea.springbootplus.framework.shiro.cache.impl;
 
+import com.suqizhao.questionStore.entity.User;
 import io.geekidea.springbootplus.framework.constant.CommonRedisKey;
 import io.geekidea.springbootplus.framework.shiro.cache.LoginRedisService;
 import io.geekidea.springbootplus.framework.shiro.convert.ShiroMapstructConvert;
 import io.geekidea.springbootplus.framework.shiro.jwt.JwtProperties;
 import io.geekidea.springbootplus.framework.shiro.jwt.JwtToken;
-import io.geekidea.springbootplus.framework.shiro.vo.ClientInfo;
-import io.geekidea.springbootplus.framework.shiro.vo.JwtTokenRedisVo;
-import io.geekidea.springbootplus.framework.shiro.vo.LoginSysUserRedisVo;
-import io.geekidea.springbootplus.framework.shiro.vo.LoginSysUserVo;
+import io.geekidea.springbootplus.framework.shiro.vo.*;
 import io.geekidea.springbootplus.system.convert.SysUserConvert;
 import io.geekidea.springbootplus.framework.util.ClientInfoUtil;
 import io.geekidea.springbootplus.framework.util.HttpServletRequestUtil;
@@ -54,6 +52,64 @@ public class LoginRedisServiceImpl implements LoginRedisService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    /**
+     * key-value: 有过期时间-->token过期时间
+     * 1. tokenMd5:jwtTokenRedisVo
+     * 2. username:loginSysUserRedisVo
+     * 3. username:salt
+     * hash: 没有过期时间，统计在线的用户信息
+     * username:num
+     */
+    @Override
+    public void cacheLoginInfo_v1_1(JwtToken jwtToken, User user) {
+        if (jwtToken == null) {
+            throw new IllegalArgumentException("jwtToken不能为空");
+        }
+        if (user == null) {
+            throw new IllegalArgumentException("User不能为空");
+        }
+        // token
+        String token = jwtToken.getToken();
+        // 盐值
+        String salt = jwtToken.getSalt();
+        // 登陆用户名称
+        String username = user.getUsername();
+        // token md5值
+        String tokenMd5 = DigestUtils.md5Hex(token);
+
+        // Redis缓存JWT Token信息
+        JwtTokenRedisVo jwtTokenRedisVo = ShiroMapstructConvert.INSTANCE.jwtTokenToJwtTokenRedisVo(jwtToken);
+
+        // 用户客户端信息
+        ClientInfo clientInfo = ClientInfoUtil.get(HttpServletRequestUtil.getRequest());
+
+        // Redis缓存登陆用户信息
+        // 将User对象复制到User，使用mapstruct进行对象属性复制
+        UserRedisVo userRedisVo = SysUserConvert.INSTANCE.UserToUserRedisVo(user);
+        userRedisVo.setSalt(salt);
+        userRedisVo.setClientInfo(clientInfo);
+
+        // Redis过期时间与JwtToken过期时间一致
+        Duration expireDuration = Duration.ofSeconds(jwtToken.getExpireSecond());
+
+        // 判断是否启用单个用户登陆，如果是，这每个用户只有一个有效token
+        boolean singleLogin = jwtProperties.isSingleLogin();
+        if (singleLogin) {
+            deleteUserAllCache(username);
+        }
+
+        // 1. tokenMd5:jwtTokenRedisVo
+        String loginTokenRedisKey = String.format(CommonRedisKey.LOGIN_TOKEN, tokenMd5);
+        redisTemplate.opsForValue().set(loginTokenRedisKey, jwtTokenRedisVo, expireDuration);
+        // 2. username:loginSysUserRedisVo
+        redisTemplate.opsForValue().set(String.format(CommonRedisKey.LOGIN_USER, username), userRedisVo, expireDuration);
+        // 3. salt hash,方便获取盐值鉴权
+        redisTemplate.opsForValue().set(String.format(CommonRedisKey.LOGIN_SALT, username), salt, expireDuration);
+        // 4. login user token
+        redisTemplate.opsForValue().set(String.format(CommonRedisKey.LOGIN_USER_TOKEN, username, tokenMd5), loginTokenRedisKey, expireDuration);
+    }
+
 
     /**
      * key-value: 有过期时间-->token过期时间

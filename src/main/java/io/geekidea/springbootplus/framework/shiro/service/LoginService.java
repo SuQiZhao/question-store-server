@@ -16,6 +16,8 @@
 
 package io.geekidea.springbootplus.framework.shiro.service;
 
+import com.suqizhao.questionStore.entity.req.UserLoginParam;
+import com.suqizhao.questionStore.vo.UserLoginTokenVo;
 import io.geekidea.springbootplus.framework.shiro.jwt.JwtToken;
 import io.geekidea.springbootplus.framework.shiro.param.LoginParam;
 import io.geekidea.springbootplus.system.entity.SysUser;
@@ -46,11 +48,11 @@ public interface LoginService {
     /**
      * 登陆
      *
-     * @param loginParam
+     * @param userLoginParam
      * @return
      * @throws Exception
      */
-    LoginSysUserTokenVo login_v1_1(LoginParam loginParam) throws Exception;
+    UserLoginTokenVo login_v1_1(UserLoginParam userLoginParam) throws Exception;
 
     /**
      * 如果(当前时间+倒计时) > 过期时间，则刷新token
