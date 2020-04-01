@@ -17,6 +17,7 @@
 package io.geekidea.springbootplus.framework.shiro.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.suqizhao.questionStore.entity.User;
 import com.suqizhao.questionStore.entity.req.UserLoginParam;
 import com.suqizhao.questionStore.vo.UserLoginTokenVo;
 import io.geekidea.springbootplus.framework.common.api.ApiResult;
@@ -83,6 +84,18 @@ public class LoginController {
         return ApiResult.okMap("token",loginSysUserTokenVo.getToken());
     }
 
+
+    /**
+     * 根据token获取系统登陆用户信息
+     */
+    @GetMapping("/getUserInfo_v1_1")
+        @ApiOperation(value = "根据token获取系统登陆用户信息", response = User.class)
+    public ApiResult<User> getUserInfo_v1_1() throws Exception {
+        String token =  JwtTokenUtil.getToken();
+        String tokenSha256 = DigestUtils.sha256Hex(token);
+        User user = (User) redisTemplate.opsForValue().get(tokenSha256);
+        return ApiResult.ok(user);
+    }
 
     /**
      * 根据token获取系统登陆用户信息

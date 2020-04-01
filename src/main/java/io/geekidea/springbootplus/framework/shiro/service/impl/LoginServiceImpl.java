@@ -63,6 +63,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
@@ -239,6 +240,13 @@ public class LoginServiceImpl implements LoginService {
         if (!userLoginParam.getPassword().equals(user.getPassword())) {
             throw new AuthenticationException("用户名或密码错误");
         }
+        //更新登录时间
+        Date newLoginTime = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        user.setLoginTime(df.parse(String.valueOf(newLoginTime)));
+
+
+
 
         // 获取数据库中保存的盐值
         String newSalt = SaltUtil.getSalt(user.getSalt(), jwtProperties);

@@ -71,10 +71,10 @@ public class JwtTokenUtil {
             throw new IllegalArgumentException("request不能为空");
         }
         // 从请求头中获取token
-        String token = request.getHeader(tokenName);
+        String token = request.getHeader("token");
         if (StringUtils.isBlank(token)) {
             // 从请求参数中获取token
-            token = request.getParameter(tokenName);
+            token = request.getParameter("token");
         }
         return token;
     }
