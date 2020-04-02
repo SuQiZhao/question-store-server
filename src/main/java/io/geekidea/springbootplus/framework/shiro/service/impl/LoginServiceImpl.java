@@ -227,6 +227,9 @@ public class LoginServiceImpl implements LoginService {
         if (user.getStatus() == 1) {
             throw new AuthenticationException("账号已禁用");
         }
+        if(user.getDeleteFlag() == 1){
+            throw new AuthenticationException("账号已被删除");
+        }
 
         // 实际项目中，前端传过来的密码应先加密
         // 原始密码明文：123456
@@ -241,12 +244,10 @@ public class LoginServiceImpl implements LoginService {
             throw new AuthenticationException("用户名或密码错误");
         }
         //更新登录时间
-        Date newLoginTime = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        user.setLoginTime(df.parse(String.valueOf(newLoginTime)));
-
-
-
+        Date currentTime = new Date();
+        user.setLoginTime(currentTime);
+        userService.updateById(user);
+        System.out.println("更新成功"+user);
 
         // 获取数据库中保存的盐值
         String newSalt = SaltUtil.getSalt(user.getSalt(), jwtProperties);
