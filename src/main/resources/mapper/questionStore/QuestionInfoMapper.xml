@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suqizhao.questionStore.mapper.QuestionInfoMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cd_id, question_title, question_category, question_detail, question_attachment, create_time, updated_time, delete_flag, create_user_identity, reading
+    </sql>
+
+    <select id="getQuestionInfoById" resultType="com.suqizhao.questionStore.vo.QuestionInfoQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from question_info where cd_id = #{id}
+    </select>
+
+    <select id="getQuestionInfoPageList" resultType="com.suqizhao.questionStore.vo.QuestionInfoQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from question_info
+    </select>
+
+</mapper>
