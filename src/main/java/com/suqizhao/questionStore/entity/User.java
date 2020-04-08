@@ -2,8 +2,8 @@ package com.suqizhao.questionStore.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+import com.suqizhao.framework.common.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.geekidea.springbootplus.framework.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,13 +13,15 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+
 /**
  * <pre>
  * 用户信息管理表
  * </pre>
  *
  * @author sqizhao
- * @since 2020-03-31
+ * @since 2020-04-08
  */
 @Data
 @Accessors(chain = true)
@@ -31,7 +33,7 @@ public class User extends BaseEntity {
 
     @ApiModelProperty("唯一标识")
     @TableId(value = "cd_id", type = IdType.AUTO)
-    private String cdId;
+    private Integer cdId;
 
     @ApiModelProperty("用户名")
     @NotBlank(message = "用户名不能为空")
@@ -76,7 +78,6 @@ public class User extends BaseEntity {
     private Date updatedTime;
 
     @ApiModelProperty("登陆时间")
-    @NotNull(message = "登陆时间不能为空")
     private Date loginTime;
 
     @ApiModelProperty("逻辑删除：0：未删除，1：已删除，默认0")

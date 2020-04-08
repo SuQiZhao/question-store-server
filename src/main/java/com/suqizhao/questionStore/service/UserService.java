@@ -1,10 +1,10 @@
 package com.suqizhao.questionStore.service;
 
 import com.suqizhao.questionStore.entity.User;
+import com.suqizhao.framework.common.service.BaseService;
+import com.suqizhao.framework.pagination.Paging;
 import com.suqizhao.questionStore.param.UserPageParam;
 import com.suqizhao.questionStore.vo.UserQueryVo;
-import io.geekidea.springbootplus.framework.common.service.BaseService;
-import io.geekidea.springbootplus.framework.pagination.Paging;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-03-31
+ * @since 2020-04-08
  */
 public interface UserService extends BaseService<User> {
 

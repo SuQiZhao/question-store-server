@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.suqizhao.questionStore.entity.User;
+import com.suqizhao.framework.pagination.Paging;
 import com.suqizhao.questionStore.param.UserPageParam;
 import com.suqizhao.questionStore.vo.UserQueryVo;
 import org.apache.ibatis.annotations.Param;
@@ -17,7 +18,7 @@ import java.io.Serializable;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-03-31
+ * @since 2020-04-08
  */
 @Repository
 public interface UserMapper extends BaseMapper<User> {

@@ -1,7 +1,7 @@
 package com.suqizhao.questionStore.param;
 
+import com.suqizhao.framework.pagination.BasePageOrderParam;
 
-import io.geekidea.springbootplus.framework.pagination.BasePageOrderParam;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  * </pre>
  *
  * @author sqizhao
- * @date 2020-03-31
+ * @date 2020-04-08
  */
 @Data
 @Accessors(chain = true)

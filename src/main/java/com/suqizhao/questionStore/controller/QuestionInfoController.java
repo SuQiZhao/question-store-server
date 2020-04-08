@@ -13,12 +13,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
-
-import com.suqizhao.framework.common.param.IdParam;
 
 /**
  * <pre>
@@ -87,5 +84,15 @@ public class QuestionInfoController extends BaseController {
         return ApiResult.ok(paging);
     }
 
+    /**
+     * 获取热门问题
+     */
+
+    @PostMapping("/getHotQuestionList")
+    @ApiOperation(value = "获取热门问题列表", notes = "热门问题信息表分页列表", response = QuestionInfoQueryVo.class)
+    public ApiResult<Paging<QuestionInfoQueryVo>> getHotQuestionList(@Validated @RequestBody QuestionInfoPageParam questionInfoPageParam) throws Exception {
+        Paging<QuestionInfoQueryVo> paging = questionInfoService.getHotQuestionList(questionInfoPageParam);
+        return ApiResult.ok(paging);
+    }
 }
 

@@ -15,7 +15,7 @@ import java.util.Date;
  * </pre>
  *
  * @author sqizhao
- * @date 2020-03-31
+ * @date 2020-04-08
  */
 @Data
 @Accessors(chain = true)
@@ -24,7 +24,7 @@ public class UserQueryVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("唯一标识")
-    private String cdId;
+    private Integer cdId;
 
     @ApiModelProperty("用户名")
     private String username;

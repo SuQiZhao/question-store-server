@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.suqizhao.questionStore.entity.User;
 import com.suqizhao.questionStore.mapper.UserMapper;
 import com.suqizhao.questionStore.service.UserService;
+import com.suqizhao.framework.pagination.Paging;
 import com.suqizhao.questionStore.param.UserPageParam;
+import com.suqizhao.framework.pagination.PageUtil;
 import com.suqizhao.questionStore.vo.UserQueryVo;
+import com.suqizhao.framework.common.service.impl.BaseServiceImpl;
 
-import io.geekidea.springbootplus.framework.common.service.impl.BaseServiceImpl;
-import io.geekidea.springbootplus.framework.pagination.PageUtil;
-import io.geekidea.springbootplus.framework.pagination.Paging;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-03-31
+ * @since 2020-04-08
  */
 @Slf4j
 @Service

@@ -2,13 +2,13 @@ package com.suqizhao.questionStore.controller;
 
 import com.suqizhao.questionStore.entity.User;
 import com.suqizhao.questionStore.service.UserService;
+import com.suqizhao.framework.pagination.Paging;
 import com.suqizhao.questionStore.param.UserPageParam;
 import com.suqizhao.questionStore.vo.UserQueryVo;
+import com.suqizhao.framework.common.api.ApiResult;
+import com.suqizhao.framework.common.controller.BaseController;
 
 
-import io.geekidea.springbootplus.framework.common.api.ApiResult;
-import io.geekidea.springbootplus.framework.common.controller.BaseController;
-import io.geekidea.springbootplus.framework.pagination.Paging;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -18,13 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
+import com.suqizhao.framework.common.param.IdParam;
+
 /**
  * <pre>
  * 用户信息管理表 前端控制器
  * </pre>
  *
  * @author sqizhao
- * @since 2020-03-31
+ * @since 2020-04-08
  */
 @Slf4j
 @RestController

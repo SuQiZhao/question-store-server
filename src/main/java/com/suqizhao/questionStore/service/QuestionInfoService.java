@@ -63,4 +63,7 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
      */
     Paging<QuestionInfoQueryVo> getQuestionInfoPageList(QuestionInfoPageParam questionInfoPageParam) throws Exception;
 
+
+    Paging<QuestionInfoQueryVo> getHotQuestionList(QuestionInfoPageParam questionInfoPageParam) throws Exception;
+
 }
