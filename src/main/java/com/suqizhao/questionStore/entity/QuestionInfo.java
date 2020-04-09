@@ -33,7 +33,7 @@ public class QuestionInfo extends BaseEntity {
 
     @ApiModelProperty("唯一标识")
     @TableId(value = "cd_id", type = IdType.AUTO)
-private String cdId;
+    private String cdId;
 
     @ApiModelProperty("问题标题")
     @NotBlank(message = "问题标题不能为空")
@@ -64,5 +64,6 @@ private String cdId;
 
     @ApiModelProperty("阅读量")
     private String reading;
+
 
 }

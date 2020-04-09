@@ -7,6 +7,7 @@ import com.suqizhao.questionStore.param.QuestionInfoPageParam;
 import com.suqizhao.questionStore.vo.QuestionInfoQueryVo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <pre>
@@ -64,6 +65,5 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
     Paging<QuestionInfoQueryVo> getQuestionInfoPageList(QuestionInfoPageParam questionInfoPageParam) throws Exception;
 
 
-    Paging<QuestionInfoQueryVo> getHotQuestionList(QuestionInfoPageParam questionInfoPageParam) throws Exception;
-
+    List<QuestionInfoQueryVo> getHotQuestionList() throws Exception;
 }

@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <pre>
@@ -40,4 +41,6 @@ public interface QuestionInfoMapper extends BaseMapper<QuestionInfo> {
      */
     IPage<QuestionInfoQueryVo> getQuestionInfoPageList(@Param("page") Page page, @Param("param") QuestionInfoPageParam questionInfoPageParam);
 
+
+    List<QuestionInfoQueryVo> getHotQuestionList();
 }

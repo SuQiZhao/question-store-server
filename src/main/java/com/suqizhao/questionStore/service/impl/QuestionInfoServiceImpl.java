@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -65,6 +66,11 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
         Page page = PageUtil.getPage(questionInfoPageParam, OrderItem.desc(getLambdaColumn(QuestionInfo::getCreateTime)));
         IPage<QuestionInfoQueryVo> iPage = questionInfoMapper.getQuestionInfoPageList(page, questionInfoPageParam);
         return new Paging(iPage);
+    }
+
+    @Override
+    public List<QuestionInfoQueryVo> getHotQuestionList() throws Exception {
+        return questionInfoMapper.getHotQuestionList();
     }
 
 }

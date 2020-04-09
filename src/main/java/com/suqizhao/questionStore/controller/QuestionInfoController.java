@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 /**
  * <pre>
  * 问题信息表 前端控制器
@@ -88,11 +90,11 @@ public class QuestionInfoController extends BaseController {
      * 获取热门问题
      */
 
-    @PostMapping("/getHotQuestionList")
-    @ApiOperation(value = "获取热门问题列表", notes = "热门问题信息表分页列表", response = QuestionInfoQueryVo.class)
-    public ApiResult<Paging<QuestionInfoQueryVo>> getHotQuestionList(@Validated @RequestBody QuestionInfoPageParam questionInfoPageParam) throws Exception {
-        Paging<QuestionInfoQueryVo> paging = questionInfoService.getHotQuestionList(questionInfoPageParam);
-        return ApiResult.ok(paging);
+    @GetMapping("/getHotQuestionList")
+    @ApiOperation(value = "获取热门问题列表", notes = "热门问题信息表分页列表",response = QuestionInfoQueryVo.class)
+    public ApiResult<Paging<QuestionInfoQueryVo>> getHotQuestionList() throws Exception {
+        List data = questionInfoService.getHotQuestionList();
+        return ApiResult.ok(data);
     }
 }
 

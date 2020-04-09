@@ -19,4 +19,14 @@
         from question_info
     </select>
 
+    <select id="getHotQuestionList" resultType="com.suqizhao.questionStore.vo.QuestionInfoQueryVo">
+        SELECT
+	    *
+        FROM
+	    question_info
+        ORDER BY
+	    reading + 0 DESC
+	    LIMIT 1,10
+    </select>
+
 </mapper>
