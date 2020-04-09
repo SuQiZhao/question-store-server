@@ -15,7 +15,7 @@ import java.util.List;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-04-07
+ * @since 2020-04-09
  */
 public interface QuestionInfoService extends BaseService<QuestionInfo> {
 
@@ -65,5 +65,22 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
     Paging<QuestionInfoQueryVo> getQuestionInfoPageList(QuestionInfoPageParam questionInfoPageParam) throws Exception;
 
 
+    /**
+     * 获取热门问题对象结果集
+     * @return
+     * @throws Exception
+     */
     List<QuestionInfoQueryVo> getHotQuestionList() throws Exception;
+
+
+    /**
+     * 获取问题总数
+     * @return
+     * @throws Exception
+     */
+    int getAllQuestionCount() throws Exception;
+
+    int getAllResolveQuestion() throws Exception;
+
+    int getAllNotResolveQuestionCount();
 }

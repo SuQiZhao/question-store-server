@@ -15,7 +15,7 @@ import java.util.Date;
  * </pre>
  *
  * @author sqizhao
- * @date 2020-04-07
+ * @date 2020-04-09
  */
 @Data
 @Accessors(chain = true)
@@ -24,7 +24,7 @@ public class QuestionInfoQueryVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("唯一标识")
-    private String cdId;
+    private Integer cdId;
 
     @ApiModelProperty("问题标题")
     private String questionTitle;
@@ -52,5 +52,11 @@ public class QuestionInfoQueryVo implements Serializable {
 
     @ApiModelProperty("阅读量")
     private String reading;
+
+    @ApiModelProperty("是否解决：0：未解决，1：已解决")
+    private Integer isResolve;
+
+    @ApiModelProperty("解决用户ID")
+    private String resolveUser;
 
 }

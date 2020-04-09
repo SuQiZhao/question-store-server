@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        cd_id, question_title, question_category, question_detail, question_attachment, create_time, updated_time, delete_flag, create_user_identity, reading
+        cd_id, question_title, question_category, question_detail, question_attachment, create_time, updated_time, delete_flag, create_user_identity, reading, is_resolve, resolve_user
     </sql>
 
     <select id="getQuestionInfoById" resultType="com.suqizhao.questionStore.vo.QuestionInfoQueryVo">
@@ -28,5 +28,28 @@
 	    reading + 0 DESC
 	    LIMIT 1,10
     </select>
+
+<!--    <select id="getAllQuestionCount" resultType="com.suqizhao.questionStore.vo.QuestionInfoQueryVo">-->
+<!--        SELECT-->
+<!--	    count(1)-->
+<!--        FROM-->
+<!--	    question_info-->
+<!--        WHERE-->
+<!--        DELETE_FLAG = 0-->
+<!--        <if test="resolve_user != null and resolve_user != ''">-->
+<!--            and resolve_user like #{id}-->
+<!--        </if>-->
+
+<!--    </select>-->
+
+<!--    <select id="getAllResolveQuestion" resultType="com.suqizhao.questionStore.vo.QuestionInfoQueryVo">-->
+<!--        SELECT-->
+<!--        count(1)-->
+<!--        FROM-->
+<!--        question_info-->
+<!--        WHERE-->
+<!--        DELETE_FLAG = 0-->
+<!--        AND IS_ROSOLVE = 1-->
+<!--    </select>-->
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.suqizhao.questionStore.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.suqizhao.questionStore.entity.QuestionInfo;
 import com.suqizhao.questionStore.mapper.QuestionInfoMapper;
 import com.suqizhao.questionStore.service.QuestionInfoService;
@@ -20,7 +21,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,7 +32,7 @@ import java.util.List;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-04-07
+ * @since 2020-04-09
  */
 @Slf4j
 @Service
@@ -71,6 +74,29 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
     @Override
     public List<QuestionInfoQueryVo> getHotQuestionList() throws Exception {
         return questionInfoMapper.getHotQuestionList();
+    }
+
+    @Override
+    public int getAllQuestionCount() throws Exception {
+        QueryWrapper<QuestionInfo> qw = new QueryWrapper<>();
+        qw.eq("delete_flag",0);
+        return questionInfoMapper.selectCount(qw);
+    }
+
+    @Override
+    public int getAllResolveQuestion() throws Exception {
+        QueryWrapper<QuestionInfo> qw = new QueryWrapper<>();
+        qw.eq("delete_flag",0);
+        qw.eq("is_resolve",1);
+        return questionInfoMapper.selectCount(qw);
+    }
+
+    @Override
+    public int getAllNotResolveQuestionCount() {
+        QueryWrapper<QuestionInfo> qw = new QueryWrapper<>();
+        qw.eq("delete_flag",0);
+        qw.eq("is_resolve",0).or().isNull("is_resolve");
+        return questionInfoMapper.selectCount(qw);
     }
 
 }

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.suqizhao.questionStore.entity.QuestionInfo;
-import com.suqizhao.framework.pagination.Paging;
 import com.suqizhao.questionStore.param.QuestionInfoPageParam;
 import com.suqizhao.questionStore.vo.QuestionInfoQueryVo;
 import org.apache.ibatis.annotations.Param;
@@ -19,7 +18,7 @@ import java.util.List;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-04-07
+ * @since 2020-04-09
  */
 @Repository
 public interface QuestionInfoMapper extends BaseMapper<QuestionInfo> {
@@ -42,5 +41,10 @@ public interface QuestionInfoMapper extends BaseMapper<QuestionInfo> {
     IPage<QuestionInfoQueryVo> getQuestionInfoPageList(@Param("page") Page page, @Param("param") QuestionInfoPageParam questionInfoPageParam);
 
 
+    /**
+     * 获取热门问题
+     * @return
+     */
     List<QuestionInfoQueryVo> getHotQuestionList();
+
 }

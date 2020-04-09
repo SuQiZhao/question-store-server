@@ -2,6 +2,8 @@ package com.suqizhao.questionStore.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.suqizhao.framework.common.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -21,7 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-04-07
+ * @since 2020-04-09
  */
 @Data
 @Accessors(chain = true)
@@ -33,7 +35,7 @@ public class QuestionInfo extends BaseEntity {
 
     @ApiModelProperty("唯一标识")
     @TableId(value = "cd_id", type = IdType.AUTO)
-    private String cdId;
+    private Integer cdId;
 
     @ApiModelProperty("问题标题")
     @NotBlank(message = "问题标题不能为空")
@@ -57,6 +59,7 @@ public class QuestionInfo extends BaseEntity {
 
     @ApiModelProperty("删除标识（0未删除，1已删除）")
     @NotNull(message = "删除标识（0未删除，1已删除）不能为空")
+    @TableLogic
     private Integer deleteFlag;
 
     @ApiModelProperty("创建者唯一标识")
@@ -65,5 +68,10 @@ public class QuestionInfo extends BaseEntity {
     @ApiModelProperty("阅读量")
     private String reading;
 
+    @ApiModelProperty("是否解决：0：未解决，1：已解决")
+    private Integer isResolve;
+
+    @ApiModelProperty("解决用户ID")
+    private String resolveUser;
 
 }

@@ -13,11 +13,16 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
+import com.suqizhao.framework.common.param.IdParam;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -25,7 +30,7 @@ import java.util.List;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-04-07
+ * @since 2020-04-09
  */
 @Slf4j
 @RestController
@@ -95,6 +100,22 @@ public class QuestionInfoController extends BaseController {
     public ApiResult<Paging<QuestionInfoQueryVo>> getHotQuestionList() throws Exception {
         List data = questionInfoService.getHotQuestionList();
         return ApiResult.ok(data);
+    }
+
+    @GetMapping("/getQuestionCount")
+    @ApiOperation(value = "获取问题统计接口", notes = "获取问题统计接口",response = ApiResult.class)
+    public ApiResult getQuestionCount () throws  Exception {
+        //全部问题
+        int allQuestionCount = questionInfoService.getAllQuestionCount();
+        //已解决
+        int resolveQuestionCount = questionInfoService.getAllResolveQuestion();
+        //未解决
+        int notResolveQuestionCount = questionInfoService.getAllNotResolveQuestionCount();
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("allQuestionCount",allQuestionCount);
+        resultMap.put("resolveQuestionCount",resolveQuestionCount);
+        resultMap.put("notResolveQuestionCount",notResolveQuestionCount);
+        return ApiResult.ok(resultMap);
     }
 }
 
