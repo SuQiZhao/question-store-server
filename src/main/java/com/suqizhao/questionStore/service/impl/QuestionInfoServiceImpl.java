@@ -99,4 +99,11 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
         return questionInfoMapper.selectCount(qw);
     }
 
+    @Override
+    public List<QuestionInfo> getAllDeleteQuestions() {
+        QueryWrapper<QuestionInfo> qw = new QueryWrapper<>();
+        qw.eq("delete_flag",0);
+        qw.eq("is_resolve",2);
+        return questionInfoMapper.selectList(qw);
+    }
 }

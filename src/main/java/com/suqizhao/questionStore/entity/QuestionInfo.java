@@ -68,7 +68,7 @@ public class QuestionInfo extends BaseEntity {
     @ApiModelProperty("阅读量")
     private String reading;
 
-    @ApiModelProperty("是否解决：0：未解决，1：已解决")
+    @ApiModelProperty("是否解决：0：未解决，1：已解决, 2：已删除")
     private Integer isResolve;
 
     @ApiModelProperty("解决用户ID")

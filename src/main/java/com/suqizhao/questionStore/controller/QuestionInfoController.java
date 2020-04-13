@@ -92,7 +92,7 @@ public class QuestionInfoController extends BaseController {
     }
 
     /**
-     * 获取热门问题
+     * 获取热门问题接口
      */
 
     @GetMapping("/getHotQuestionList")
@@ -102,6 +102,11 @@ public class QuestionInfoController extends BaseController {
         return ApiResult.ok(data);
     }
 
+    /**
+     * 获取问题统计接口
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/getQuestionCount")
     @ApiOperation(value = "获取问题统计接口", notes = "获取问题统计接口",response = ApiResult.class)
     public ApiResult getQuestionCount () throws  Exception {
@@ -116,6 +121,18 @@ public class QuestionInfoController extends BaseController {
         resultMap.put("resolveQuestionCount",resolveQuestionCount);
         resultMap.put("notResolveQuestionCount",notResolveQuestionCount);
         return ApiResult.ok(resultMap);
+    }
+
+
+    /**
+     * 获取热门问题接口
+     */
+
+    @GetMapping("/getAllDeleteQuestions")
+    @ApiOperation(value = "获取已删除问题列表", notes = "获取已删除问题列表",response = QuestionInfoQueryVo.class)
+    public ApiResult<Paging<QuestionInfo>> getAllDeleteQuestions() throws Exception {
+        List data = questionInfoService.getHotQuestionList();
+        return ApiResult.ok(data);
     }
 }
 

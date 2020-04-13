@@ -82,5 +82,7 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
 
     int getAllResolveQuestion() throws Exception;
 
-    int getAllNotResolveQuestionCount();
+    int getAllNotResolveQuestionCount() throws Exception;
+
+    List<QuestionInfo> getAllDeleteQuestions() throws Exception;
 }
