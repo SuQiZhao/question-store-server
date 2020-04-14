@@ -1,5 +1,7 @@
 package com.suqizhao.questionStore.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.suqizhao.questionStore.entity.QuestionInfo;
 import com.suqizhao.questionStore.service.QuestionInfoService;
 import com.suqizhao.framework.pagination.Paging;
@@ -12,6 +14,7 @@ import com.suqizhao.framework.common.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.suqizhao.framework.common.param.IdParam;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,6 +137,38 @@ public class QuestionInfoController extends BaseController {
     public ApiResult<Paging<QuestionInfo>> getAllDeleteQuestions() throws Exception {
         List data = questionInfoService.getHotQuestionList();
         return ApiResult.ok(data);
+    }
+
+    /**
+     * 根据分类获取问题分页接口
+     */
+
+    @GetMapping("/getQuestionPage")
+    @ApiOperation(value = "根据分类获取问题分页接口", notes = "根据分类获取问题分页接口",response = QuestionInfoQueryVo.class)
+    public ApiResult<Paging<QuestionInfo>> getQuestionPage(@ApiParam(required = true, name = "size", value = "分页大小") @RequestParam(value = "size", required = true, defaultValue = "10") Long size,
+                                                           @ApiParam(required = true, name = "current", value = "当前页") @RequestParam(value = "current", required = true, defaultValue = "1") Long current,
+                                                           @ApiParam(required = false, name = "createUserIdentity", value = "创建用户ID") @RequestParam(value = "createUserIdentity", required = false) String createUserIdentity,
+                                                           @ApiParam(required = false, name = "questionCategory", value = "课程分类") @RequestParam(value = "questionCategory", required = false) String questionCategory) throws Exception {
+        Paging<QuestionInfoQueryVo> paging = questionInfoService.getQuestionPage(size,current,createUserIdentity,questionCategory);
+        return ApiResult.ok(paging);
+    }
+
+
+    /**
+     * 根据条件获取问题分页接口
+     */
+
+    @GetMapping("/findQuestionPage")
+    @ApiOperation(value = "根据条件获取问题分页接口", notes = "根据条件获取问题分页接口",response = QuestionInfoQueryVo.class)
+    public ApiResult<Paging<QuestionInfo>> findQuestionPage(@ApiParam(required = true, name = "current", value = "当前页") @RequestParam(value = "current", required = true, defaultValue = "1") Long current,
+                                                            @ApiParam(required = true, name = "size", value = "分页大小") @RequestParam(value = "size", required = true, defaultValue = "10") Long size,
+                                                            @ApiParam(required = false, name = "createUserIdentity", value = "创建用户ID") @RequestParam(value = "createUserIdentity", required = false,defaultValue = "") String createUserIdentity,
+                                                            @ApiParam(required = false, name = "questionCategory", value = "课程分类") @RequestParam(value = "questionCategory", required = false,defaultValue = "") String questionCategory,
+                                                            @ApiParam(required = false, name = "questionTitle", value = "题目标题") @RequestParam(value = "questionTitle", required = false,defaultValue = "") String questionTitle,
+                                                            @ApiParam(required = false, name = "startDate", value = "开始日期") @RequestParam(value = "startDate", required = false,defaultValue = "") Date startDate,
+                                                            @ApiParam(required = false, name = "endDate", value = "结束日期") @RequestParam(value = "endDate", required = false,defaultValue = "") Date endDate) throws Exception {
+        Page<QuestionInfoQueryVo> paging = questionInfoService.findQuestionPage(size,current,createUserIdentity,questionCategory,questionTitle,startDate,endDate);
+        return ApiResult.ok(paging);
     }
 }
 

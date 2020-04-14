@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,12 +44,16 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean saveQuestionInfo(QuestionInfo questionInfo) throws Exception {
+        Date currentTime = new Date();
+        questionInfo.setCreateTime(currentTime);
         return super.save(questionInfo);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean updateQuestionInfo(QuestionInfo questionInfo) throws Exception {
+        Date currentTime = new Date();
+        questionInfo.setUpdatedTime(currentTime);
         return super.updateById(questionInfo);
     }
 
@@ -105,5 +109,31 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
         qw.eq("delete_flag",0);
         qw.eq("is_resolve",2);
         return questionInfoMapper.selectList(qw);
+    }
+
+    @Override
+    public Paging<QuestionInfoQueryVo> getQuestionPage(Long size, Long current, String createUserIdentity, String questionCategory) throws Exception {
+        IPage<Map<String,Object>> page=new Page<>(current,size);
+        QueryWrapper<QuestionInfo> qw = new QueryWrapper<>();
+        if(questionCategory == null || questionCategory == ""){
+            qw.eq("create_user_identity",createUserIdentity);
+            qw.eq("delete_flag",0);
+            qw.orderByDesc("create_time");
+        }else{
+            qw.eq("question_category",questionCategory);
+            qw.eq("create_user_identity",createUserIdentity);
+            qw.eq("delete_flag",0);
+            qw.orderByDesc("create_time");
+        }
+        IPage<Map<String,Object>> mapIPage = questionInfoMapper.selectMapsPage(page,qw);
+        return new Paging(mapIPage);
+    }
+
+
+    @Override
+    public Page<QuestionInfoQueryVo> findQuestionPage(Long current, Long size, String createUserIdentity, String questionCategory, String questionTitle, Date startDate, Date endDate) throws Exception{
+        Page page = new Page(size,current);
+        Page<QuestionInfoQueryVo> questionInfoQueryVoPage =questionInfoMapper.findQuestionPage(page,createUserIdentity,questionCategory,questionTitle,startDate,endDate);
+        return questionInfoQueryVoPage;
     }
 }

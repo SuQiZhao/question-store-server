@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,4 +48,20 @@ public interface QuestionInfoMapper extends BaseMapper<QuestionInfo> {
      */
     List<QuestionInfoQueryVo> getHotQuestionList();
 
+    /**
+     * 根据条件获取问题分页
+     * @param page
+     * @param question_category
+     * @param question_title
+     * @param create_user_identity
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    Page<QuestionInfoQueryVo> findQuestionPage(@Param("page") Page page,
+                                                @Param("createUserIdentity") String createUserIdentity,
+                                                @Param("questionCategory") String questionCategory,
+                                                @Param("questionTitle") String questionTitle,
+                                                @Param("startDate") Date startDate,
+                                                @Param("endDate") Date endDate);
 }

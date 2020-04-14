@@ -1,5 +1,7 @@
 package com.suqizhao.questionStore.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.suqizhao.questionStore.entity.QuestionInfo;
 import com.suqizhao.framework.common.service.BaseService;
 import com.suqizhao.framework.pagination.Paging;
@@ -7,6 +9,7 @@ import com.suqizhao.questionStore.param.QuestionInfoPageParam;
 import com.suqizhao.questionStore.vo.QuestionInfoQueryVo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -85,4 +88,29 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
     int getAllNotResolveQuestionCount() throws Exception;
 
     List<QuestionInfo> getAllDeleteQuestions() throws Exception;
+
+    /**
+     *
+     * @param size
+     * @param current
+     * @param createUserIdentity
+     * @param questionCategory
+     * @return
+     * @throws Exception
+     */
+    Paging<QuestionInfoQueryVo> getQuestionPage(Long size, Long current, String createUserIdentity, String questionCategory) throws Exception;
+
+    /**
+     * 根据问题条件查询分页
+     * @param current
+     * @param size
+     * @param questionCategory
+     * @param questionTitle
+     * @param createUserIdentity
+     * @param startDate
+     * @param endDate
+     * @return
+     * @throws Exception
+     */
+    Page<QuestionInfoQueryVo> findQuestionPage(Long current, Long size,String createUserIdentity, String questionCategory, String questionTitle, Date startDate, Date endDate) throws Exception;
 }
