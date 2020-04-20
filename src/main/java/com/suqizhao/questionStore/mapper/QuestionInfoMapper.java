@@ -49,11 +49,11 @@ public interface QuestionInfoMapper extends BaseMapper<QuestionInfo> {
     List<QuestionInfoQueryVo> getHotQuestionList();
 
     /**
-     * 根据条件获取问题分页
+     *
      * @param page
-     * @param question_category
-     * @param question_title
-     * @param create_user_identity
+     * @param createUserIdentity
+     * @param questionCategory
+     * @param questionTitle
      * @param startDate
      * @param endDate
      * @return
