@@ -131,9 +131,9 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
 
 
     @Override
-    public Page<QuestionInfoQueryVo> findQuestionPage(Long current, Long size, String createUserIdentity, String questionCategory, String questionTitle, Date startDate, Date endDate) throws Exception{
+    public Page<QuestionInfoQueryVo> findQuestionPage(Long current, Long size, String createUserIdentity, String questionCategory, String questionTitle, Date startDate, Date endDate,String isResolve) throws Exception{
         Page page = new Page(size,current);
-        Page<QuestionInfoQueryVo> questionInfoQueryVoPage =questionInfoMapper.findQuestionPage(page,createUserIdentity,questionCategory,questionTitle,startDate,endDate);
+        Page<QuestionInfoQueryVo> questionInfoQueryVoPage =questionInfoMapper.findQuestionPage(page,createUserIdentity,questionCategory,questionTitle,startDate,endDate,isResolve);
         return questionInfoQueryVoPage;
     }
 }

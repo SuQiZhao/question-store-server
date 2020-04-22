@@ -63,5 +63,6 @@ public interface QuestionInfoMapper extends BaseMapper<QuestionInfo> {
                                                 @Param("questionCategory") String questionCategory,
                                                 @Param("questionTitle") String questionTitle,
                                                 @Param("startDate") Date startDate,
-                                                @Param("endDate") Date endDate);
+                                                @Param("endDate") Date endDate,
+                                               @Param("isResolve") String isResolve);
 }

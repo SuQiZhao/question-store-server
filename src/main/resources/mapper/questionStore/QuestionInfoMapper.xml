@@ -55,6 +55,9 @@
               AND create_time <= #{endDate}
            ]]>
         </if>
+        <if test="isResolve != null and isResolve != ''">
+              AND is_resolve = #{isResolve}
+        </if>
             order by create_time desc
     </select>
 </mapper>

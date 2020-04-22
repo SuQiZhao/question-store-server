@@ -59,7 +59,7 @@ public class QuestionInfo extends BaseEntity {
 
     @ApiModelProperty("删除标识（0未删除，1已删除）")
     @NotNull(message = "删除标识（0未删除，1已删除）不能为空")
-    @TableLogic
+    @TableLogic(value = "0",delval = "1")
     private Integer deleteFlag;
 
     @ApiModelProperty("创建者唯一标识")
@@ -68,7 +68,7 @@ public class QuestionInfo extends BaseEntity {
     @ApiModelProperty("阅读量")
     private String reading;
 
-    @ApiModelProperty("是否解决：0：未解决，1：已解决, 2：已删除")
+    @ApiModelProperty("是否解决：0：未解决，1：已解决, 2：已关闭")
     private Integer isResolve;
 
     @ApiModelProperty("解决用户ID")

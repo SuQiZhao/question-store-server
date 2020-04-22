@@ -166,8 +166,9 @@ public class QuestionInfoController extends BaseController {
                                                             @ApiParam(required = false, name = "questionCategory", value = "课程分类") @RequestParam(value = "questionCategory", required = false,defaultValue = "") String questionCategory,
                                                             @ApiParam(required = false, name = "questionTitle", value = "题目标题") @RequestParam(value = "questionTitle", required = false,defaultValue = "") String questionTitle,
                                                             @ApiParam(required = false, name = "startDate", value = "开始日期") @RequestParam(value = "startDate", required = false,defaultValue = "") Date startDate,
-                                                            @ApiParam(required = false, name = "endDate", value = "结束日期") @RequestParam(value = "endDate", required = false,defaultValue = "") Date endDate) throws Exception {
-        Page<QuestionInfoQueryVo> paging = questionInfoService.findQuestionPage(size,current,createUserIdentity,questionCategory,questionTitle,startDate,endDate);
+                                                            @ApiParam(required = false, name = "endDate", value = "结束日期") @RequestParam(value = "endDate", required = false,defaultValue = "") Date endDate,
+                                                            @ApiParam(required = false, name = "isResolve", value = "题目状态") @RequestParam(value = "isResolve", required = false,defaultValue = "") String isResolve) throws Exception {
+        Page<QuestionInfoQueryVo> paging = questionInfoService.findQuestionPage(size,current,createUserIdentity,questionCategory,questionTitle,startDate,endDate,isResolve);
         return ApiResult.ok(paging);
     }
 }

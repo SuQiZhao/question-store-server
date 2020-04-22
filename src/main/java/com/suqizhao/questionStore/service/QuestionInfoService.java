@@ -112,5 +112,5 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
      * @return
      * @throws Exception
      */
-    Page<QuestionInfoQueryVo> findQuestionPage(Long current, Long size,String createUserIdentity, String questionCategory, String questionTitle, Date startDate, Date endDate) throws Exception;
+    Page<QuestionInfoQueryVo> findQuestionPage(Long current, Long size,String createUserIdentity, String questionCategory, String questionTitle, Date startDate, Date endDate,String isResolve) throws Exception;
 }
