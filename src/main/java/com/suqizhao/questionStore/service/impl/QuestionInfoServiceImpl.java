@@ -64,8 +64,9 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
     }
 
     @Override
-    public QuestionInfoQueryVo getQuestionInfoById(Serializable id) throws Exception {
-        return questionInfoMapper.getQuestionInfoById(id);
+    public QuestionInfo getQuestionInfoById(Serializable id) throws Exception {
+        QueryWrapper<QuestionInfo> qw = new QueryWrapper<>();
+        return questionInfoMapper.selectById(id);
     }
 
     @Override

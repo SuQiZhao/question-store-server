@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suqizhao.questionStore.mapper.QuestionAnswserMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, question_id, user_id, nickname, content, like, is_best, create_time, update_time, delete_flag
+    </sql>
+
+    <select id="getQuestionAnswserById" resultType="com.suqizhao.questionStore.vo.QuestionAnswserQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from question_answser where id = #{id}
+    </select>
+
+    <select id="getQuestionAnswserPageList" resultType="com.suqizhao.questionStore.vo.QuestionAnswserQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from question_answser
+    </select>
+
+    <select id="findAnswserPage" resultType="com.suqizhao.questionStore.vo.QuestionAnswserQueryVo">
+        SELECT
+        *
+        FROM
+        question_answser
+        WHERE
+        DELETE_FLAG = 0
+        <if test="questionId != null and questionId != ''">
+            and question_id = #{questionId}
+        </if>
+        <if test="userId != null and userId != ''">
+            and user_id = #{userId}
+        </if>
+        <if test="isBest != null and isBest != ''">
+            AND is_best = #{isBest}
+        </if>
+        order by create_time desc
+    </select>
+</mapper>

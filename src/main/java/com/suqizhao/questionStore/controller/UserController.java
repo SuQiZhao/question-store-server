@@ -12,6 +12,7 @@ import com.suqizhao.framework.common.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,11 +71,11 @@ public class UserController extends BaseController {
     /**
      * 获取用户信息管理表
      */
-    @GetMapping("/info/{id}")
+    @GetMapping("/info")
     @ApiOperation(value = "获取User对象详情", notes = "查看用户信息管理表", response = UserQueryVo.class)
-    public ApiResult<UserQueryVo> getUser(@PathVariable("id") Long id) throws Exception {
-        UserQueryVo userQueryVo = userService.getUserById(id);
-        return ApiResult.ok(userQueryVo);
+    public ApiResult<User> getUser(@ApiParam(required = true, name = "id", value = "唯一编码") @RequestParam(value = "id", required = true) String id) throws Exception {
+        User user = userService.getUserById(id);
+        return ApiResult.ok(user);
     }
 
     /**

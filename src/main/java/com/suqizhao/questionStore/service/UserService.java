@@ -52,7 +52,7 @@ public interface UserService extends BaseService<User> {
      * @return
      * @throws Exception
      */
-    UserQueryVo getUserById(Serializable id) throws Exception;
+    User getUserById(Serializable id) throws Exception;
 
     /**
      * 获取分页对象

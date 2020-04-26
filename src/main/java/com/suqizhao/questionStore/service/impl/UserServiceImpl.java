@@ -57,8 +57,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     }
 
     @Override
-    public UserQueryVo getUserById(Serializable id) throws Exception {
-        return userMapper.getUserById(id);
+    public User getUserById(Serializable id) throws Exception {
+        return userMapper.selectById(id);
     }
 
     @Override

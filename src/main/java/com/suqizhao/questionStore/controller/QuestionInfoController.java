@@ -3,9 +3,11 @@ package com.suqizhao.questionStore.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.suqizhao.questionStore.entity.QuestionInfo;
+import com.suqizhao.questionStore.entity.User;
 import com.suqizhao.questionStore.service.QuestionInfoService;
 import com.suqizhao.framework.pagination.Paging;
 import com.suqizhao.questionStore.param.QuestionInfoPageParam;
+import com.suqizhao.questionStore.service.UserService;
 import com.suqizhao.questionStore.vo.QuestionInfoQueryVo;
 import com.suqizhao.framework.common.api.ApiResult;
 import com.suqizhao.framework.common.controller.BaseController;
@@ -45,6 +47,9 @@ public class QuestionInfoController extends BaseController {
     @Autowired
     private QuestionInfoService questionInfoService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 添加问题信息表
      */
@@ -78,11 +83,15 @@ public class QuestionInfoController extends BaseController {
     /**
      * 获取问题信息表
      */
-    @GetMapping("/info/{id}")
+    @GetMapping("/info")
     @ApiOperation(value = "获取QuestionInfo对象详情", notes = "查看问题信息表", response = QuestionInfoQueryVo.class)
-    public ApiResult<QuestionInfoQueryVo> getQuestionInfo(@PathVariable("id") Long id) throws Exception {
-        QuestionInfoQueryVo questionInfoQueryVo = questionInfoService.getQuestionInfoById(id);
-        return ApiResult.ok(questionInfoQueryVo);
+    public ApiResult<QuestionInfoQueryVo> getQuestionInfo(@ApiParam(required = true, name = "id", value = "唯一编码") @RequestParam(value = "id", required = true) String id) throws Exception {
+        QuestionInfo questionInfo = questionInfoService.getQuestionInfoById(id);
+        String userId = questionInfo.getCreateUserIdentity();
+        User user = userService.getUserById(userId);
+        String nickName = user.getNickname();
+        questionInfo.setCreateUserIdentity(nickName);
+        return ApiResult.ok(questionInfo);
     }
 
     /**

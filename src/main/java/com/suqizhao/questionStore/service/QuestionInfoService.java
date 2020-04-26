@@ -56,7 +56,7 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
      * @return
      * @throws Exception
      */
-    QuestionInfoQueryVo getQuestionInfoById(Serializable id) throws Exception;
+    QuestionInfo getQuestionInfoById(Serializable id) throws Exception;
 
     /**
      * 获取分页对象
