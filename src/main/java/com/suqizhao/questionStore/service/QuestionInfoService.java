@@ -11,6 +11,7 @@ import com.suqizhao.questionStore.vo.QuestionInfoQueryVo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -113,4 +114,6 @@ public interface QuestionInfoService extends BaseService<QuestionInfo> {
      * @throws Exception
      */
     Page<QuestionInfoQueryVo> findQuestionPage(Long current, Long size,String createUserIdentity, String questionCategory, String questionTitle, Date startDate, Date endDate,String isResolve) throws Exception;
+
+    List<QuestionInfoQueryVo> getSameQuestions(String questionTitle) throws Exception;
 }

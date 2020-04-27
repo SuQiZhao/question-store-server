@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suqizhao.questionStore.mapper.NoticeMsgMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        unid, created_user_id, created_username, create_time, update_time, update_user_id, update_username, delete_flag, title, content
+    </sql>
+
+    <select id="getNoticeMsgById" resultType="com.suqizhao.questionStore.vo.NoticeMsgQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from notice_msg where id = #{id}
+    </select>
+
+    <select id="getNoticeMsgPageList" resultType="com.suqizhao.questionStore.vo.NoticeMsgQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from notice_msg
+    </select>
+
+</mapper>

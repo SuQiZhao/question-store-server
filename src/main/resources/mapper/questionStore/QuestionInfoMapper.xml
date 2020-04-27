@@ -60,4 +60,17 @@
         </if>
             order by create_time desc
     </select>
+
+    <select id="getSameQuestions" resultType="com.suqizhao.questionStore.vo.QuestionInfoQueryVo">
+    SELECT
+    *
+    FROM
+    QUESTION_INFO
+    WHERE
+    DELETE_FLAG = 0
+    <if test="questionTitle != null and questionTitle != ''">
+        AND question_title like CONCAT('%',CONCAT( LEFT(#{questionTitle},2),'%'))
+    </if>
+    ORDER BY CREATE_TIME DESC LIMIT 1,10;
+    </select>
 </mapper>

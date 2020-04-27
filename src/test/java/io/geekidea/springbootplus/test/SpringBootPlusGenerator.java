@@ -66,11 +66,11 @@ public class SpringBootPlusGenerator {
 
         // 生成业务相关代码
         codeGenerator
-                .setGeneratorController(false)
-                .setGeneratorService(false)
-                .setGeneratorServiceImpl(false)
-                .setGeneratorMapper(false)
-                .setGeneratorMapperXml(false);
+                .setGeneratorController(true)
+                .setGeneratorService(true)
+                .setGeneratorServiceImpl(true)
+                .setGeneratorMapper(true)
+                .setGeneratorMapperXml(true);
 
         // 是否生成Shiro RequiresPermissions注解
         codeGenerator.setRequiresPermissions(false);
@@ -84,7 +84,7 @@ public class SpringBootPlusGenerator {
         // 需要生成的表数组
         // xxx,yyy,zzz为需要生成代码的表名称
         String[] tables = {
-                "question_answser"
+                "notice_msg"
         };
 
         // 循环生成

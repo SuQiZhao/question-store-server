@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -65,4 +66,6 @@ public interface QuestionInfoMapper extends BaseMapper<QuestionInfo> {
                                                 @Param("startDate") Date startDate,
                                                 @Param("endDate") Date endDate,
                                                @Param("isResolve") String isResolve);
+
+    List<QuestionInfoQueryVo> getSameQuestions(@Param("questionTitle") String questionTitle);
 }

@@ -137,4 +137,9 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
         Page<QuestionInfoQueryVo> questionInfoQueryVoPage =questionInfoMapper.findQuestionPage(page,createUserIdentity,questionCategory,questionTitle,startDate,endDate,isResolve);
         return questionInfoQueryVoPage;
     }
+
+    @Override
+    public List<QuestionInfoQueryVo> getSameQuestions(String questionTitle) throws Exception {
+        return questionInfoMapper.getSameQuestions(questionTitle);
+    }
 }

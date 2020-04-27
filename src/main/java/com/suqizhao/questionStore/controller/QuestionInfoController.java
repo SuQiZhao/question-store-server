@@ -180,5 +180,12 @@ public class QuestionInfoController extends BaseController {
         Page<QuestionInfoQueryVo> paging = questionInfoService.findQuestionPage(size,current,createUserIdentity,questionCategory,questionTitle,startDate,endDate,isResolve);
         return ApiResult.ok(paging);
     }
+
+    @GetMapping("/getSameQuestions")
+    @ApiOperation(value = "获取相似问题接口", notes = "获取相似问题接口",response = QuestionInfoQueryVo.class)
+    public ApiResult<Paging<QuestionInfoQueryVo>> getSameQuestions(@ApiParam(required = false, name = "questionTitle", value = "题目标题") @RequestParam(value = "questionTitle", required = false,defaultValue = "") String questionTitle) throws Exception {
+        List data = questionInfoService.getSameQuestions(questionTitle);
+        return ApiResult.ok(data);
+    }
 }
 
