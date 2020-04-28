@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <pre>
@@ -40,4 +41,9 @@ public interface NoticeMsgMapper extends BaseMapper<NoticeMsg> {
      */
     IPage<NoticeMsgQueryVo> getNoticeMsgPageList(@Param("page") Page page, @Param("param") NoticeMsgPageParam noticeMsgPageParam);
 
+    Page<NoticeMsgQueryVo> findNoticePage(@Param("page") Page page,
+                                          @Param("username") String username,
+                                          @Param("userId") String userId,
+                                          @Param("startDate") Date startDate,
+                                          @Param("endDate") Date endDate);
 }

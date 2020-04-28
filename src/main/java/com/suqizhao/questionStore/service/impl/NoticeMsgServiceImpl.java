@@ -9,6 +9,7 @@ import com.suqizhao.framework.pagination.PageUtil;
 import com.suqizhao.questionStore.vo.NoticeMsgQueryVo;
 import com.suqizhao.framework.common.service.impl.BaseServiceImpl;
 
+import com.suqizhao.questionStore.vo.QuestionAnswserQueryVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -40,12 +42,16 @@ public class NoticeMsgServiceImpl extends BaseServiceImpl<NoticeMsgMapper, Notic
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean saveNoticeMsg(NoticeMsg noticeMsg) throws Exception {
+        Date currentTime = new Date();
+        noticeMsg.setCreateTime(currentTime);
         return super.save(noticeMsg);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean updateNoticeMsg(NoticeMsg noticeMsg) throws Exception {
+        Date currentTime = new Date();
+        noticeMsg.setUpdateTime(currentTime);
         return super.updateById(noticeMsg);
     }
 
@@ -65,6 +71,13 @@ public class NoticeMsgServiceImpl extends BaseServiceImpl<NoticeMsgMapper, Notic
         Page page = PageUtil.getPage(noticeMsgPageParam, OrderItem.desc(getLambdaColumn(NoticeMsg::getCreateTime)));
         IPage<NoticeMsgQueryVo> iPage = noticeMsgMapper.getNoticeMsgPageList(page, noticeMsgPageParam);
         return new Paging(iPage);
+    }
+
+    @Override
+    public Page<NoticeMsgQueryVo> findNoticePage(Long size, Long current, String username, String userId, Date startDate, Date endDate) throws Exception {
+        Page page = new Page(current,size);
+        Page<NoticeMsgQueryVo> noticeMsgQueryVoPage =noticeMsgMapper.findNoticePage(page,username,userId,startDate,endDate);
+        return noticeMsgQueryVoPage;
     }
 
 }

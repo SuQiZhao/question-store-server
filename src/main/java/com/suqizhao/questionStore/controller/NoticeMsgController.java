@@ -1,5 +1,6 @@
 package com.suqizhao.questionStore.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.suqizhao.questionStore.entity.NoticeMsg;
 import com.suqizhao.questionStore.service.NoticeMsgService;
 import com.suqizhao.framework.pagination.Paging;
@@ -12,6 +13,7 @@ import com.suqizhao.framework.common.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
 import com.suqizhao.framework.common.param.IdParam;
+
+import java.util.Date;
 
 /**
  * <pre>
@@ -86,6 +90,20 @@ public class NoticeMsgController extends BaseController {
         Paging<NoticeMsgQueryVo> paging = noticeMsgService.getNoticeMsgPageList(noticeMsgPageParam);
         return ApiResult.ok(paging);
     }
+    /**
+     * 根据条件获取通知公告分页接口
+     */
 
+    @GetMapping("/findNoticePage")
+    @ApiOperation(value = "根据条件获取通知公告分页接口", notes = "根据条件获取通知公告分页接口",response = NoticeMsgQueryVo.class)
+    public ApiResult<Paging<NoticeMsg>> findNoticePage(@ApiParam(required = true, name = "current", value = "当前页") @RequestParam(value = "current", required = true, defaultValue = "1") Long current,
+                                                       @ApiParam(required = true, name = "size", value = "分页大小") @RequestParam(value = "size", required = true, defaultValue = "10") Long size,
+                                                       @ApiParam(required = false, name = "username", value = "用户名") @RequestParam(value = "username", required = false,defaultValue = "") String username,
+                                                       @ApiParam(required = false, name = "userId", value = "用户ID") @RequestParam(value = "userId", required = false,defaultValue = "") String userId,
+                                                       @ApiParam(required = false, name = "startDate", value = "开始日期") @RequestParam(value = "startDate", required = false,defaultValue = "") Date startDate,
+                                                       @ApiParam(required = false, name = "endDate", value = "结束日期") @RequestParam(value = "endDate", required = false,defaultValue = "") Date endDate) throws Exception {
+        Page<NoticeMsgQueryVo> paging = noticeMsgService.findNoticePage(size,current,username,userId,startDate,endDate);
+        return ApiResult.ok(paging);
+    }
 }
 

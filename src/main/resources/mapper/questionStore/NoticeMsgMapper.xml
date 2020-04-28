@@ -19,4 +19,30 @@
         from notice_msg
     </select>
 
+    <select id="findNoticePage" resultType="com.suqizhao.questionStore.vo.NoticeMsgQueryVo">
+        SELECT
+        *
+        FROM
+        notice_msg
+        WHERE
+        DELETE_FLAG = 0
+        <if test="username != null and username != ''">
+            and created_username = #{username}
+        </if>
+        <if test="userId != null and userId != ''">
+            and created_user_id = #{userId}
+        </if>
+        <if test="startDate != null">
+            <![CDATA[
+                AND create_time >= #{startDate}
+             ]]>
+        </if>
+        <if test="endDate != null">
+            <![CDATA[
+              AND create_time <= #{endDate}
+           ]]>
+        </if>
+        order by create_time desc
+    </select>
+
 </mapper>

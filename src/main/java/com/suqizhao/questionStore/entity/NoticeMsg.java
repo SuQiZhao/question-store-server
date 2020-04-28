@@ -2,6 +2,8 @@ package com.suqizhao.questionStore.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.suqizhao.framework.common.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -54,6 +56,7 @@ public class NoticeMsg extends BaseEntity {
     private String updateUsername;
 
     @ApiModelProperty("逻辑删除")
+    @TableLogic(value = "0",delval = "1")
     private Integer deleteFlag;
 
     @ApiModelProperty("通知标题")

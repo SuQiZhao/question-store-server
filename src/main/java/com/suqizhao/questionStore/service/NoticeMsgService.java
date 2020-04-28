@@ -1,5 +1,6 @@
 package com.suqizhao.questionStore.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.suqizhao.questionStore.entity.NoticeMsg;
 import com.suqizhao.framework.common.service.BaseService;
 import com.suqizhao.framework.pagination.Paging;
@@ -7,6 +8,7 @@ import com.suqizhao.questionStore.param.NoticeMsgPageParam;
 import com.suqizhao.questionStore.vo.NoticeMsgQueryVo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <pre>
@@ -63,4 +65,5 @@ public interface NoticeMsgService extends BaseService<NoticeMsg> {
      */
     Paging<NoticeMsgQueryVo> getNoticeMsgPageList(NoticeMsgPageParam noticeMsgPageParam) throws Exception;
 
+    Page<NoticeMsgQueryVo> findNoticePage(Long size, Long current, String username, String userId, Date startDate, Date endDate) throws Exception;
 }
