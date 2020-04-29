@@ -101,8 +101,10 @@ public class QuestionAnswserController extends BaseController {
                                                             @ApiParam(required = true, name = "size", value = "分页大小") @RequestParam(value = "size", required = true, defaultValue = "10") Long size,
                                                             @ApiParam(required = false, name = "questionId", value = "问题ID") @RequestParam(value = "questionId", required = false,defaultValue = "") String questionId,
                                                             @ApiParam(required = false, name = "userId", value = "用户ID") @RequestParam(value = "userId", required = false,defaultValue = "") String userId,
-                                                            @ApiParam(required = false, name = "isBest", value = "题目状态") @RequestParam(value = "isBest", required = false,defaultValue = "") String isBest) throws Exception {
-        Page<QuestionAnswserQueryVo> paging = questionAnswserService.findAnswserPage(size,current,questionId,userId,isBest);
+                                                            @ApiParam(required = false, name = "isBest", value = "题目状态") @RequestParam(value = "isBest", required = false,defaultValue = "") String isBest,
+                                                              @ApiParam(required = false, name = "questionTitle", value = "题目标题") @RequestParam(value = "questionTitle", required = false,defaultValue = "") String questionTitle,
+                                                              @ApiParam(required = false, name = "content", value = "回答内容") @RequestParam(value = "content", required = false,defaultValue = "") String content) throws Exception {
+        Page<QuestionAnswserQueryVo> paging = questionAnswserService.findAnswserPage(size,current,questionId,userId,isBest,questionTitle,content);
         return ApiResult.ok(paging);
     }
 

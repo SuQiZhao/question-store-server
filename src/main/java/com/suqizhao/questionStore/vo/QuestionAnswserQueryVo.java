@@ -56,4 +56,7 @@ public class QuestionAnswserQueryVo implements Serializable {
     @ApiModelProperty("逻辑删除，0：未删除，1：已删除")
     private Integer deleteFlag;
 
+    @ApiModelProperty("题目标题")
+    private String questionTitle;
+
 }

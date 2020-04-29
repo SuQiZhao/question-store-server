@@ -59,7 +59,6 @@ public class QuestionInfo extends BaseEntity {
 
     @ApiModelProperty("删除标识（0未删除，1已删除）")
     @NotNull(message = "删除标识（0未删除，1已删除）不能为空")
-    @TableLogic(value = "0",delval = "1")
     private Integer deleteFlag;
 
     @ApiModelProperty("创建者唯一标识")

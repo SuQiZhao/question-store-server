@@ -74,9 +74,9 @@ public class QuestionAnswserServiceImpl extends BaseServiceImpl<QuestionAnswserM
     }
 
     @Override
-    public Page<QuestionAnswserQueryVo> findAnswserPage(Long size, Long current, String questionId, String userId, String isBest) {
+    public Page<QuestionAnswserQueryVo> findAnswserPage(Long size, Long current, String questionId, String userId, String isBest,String questionTitle,String content) {
         Page page = new Page(current,size);
-        Page<QuestionAnswserQueryVo> questionInfoQueryVoPage =questionAnswserMapper.findAnswserPage(page,questionId,userId,isBest);
+        Page<QuestionAnswserQueryVo> questionInfoQueryVoPage =questionAnswserMapper.findAnswserPage(page,questionId,userId,isBest,questionTitle,content);
         return questionInfoQueryVoPage;
     }
 

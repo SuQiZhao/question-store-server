@@ -1,5 +1,6 @@
 package com.suqizhao.questionStore.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.suqizhao.questionStore.entity.NoticeMsg;
 import com.suqizhao.questionStore.mapper.NoticeMsgMapper;
 import com.suqizhao.questionStore.service.NoticeMsgService;
@@ -57,8 +58,10 @@ public class NoticeMsgServiceImpl extends BaseServiceImpl<NoticeMsgMapper, Notic
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteNoticeMsg(Long id) throws Exception {
-        return super.removeById(id);
+    public boolean deleteNoticeMsg(String unid) throws Exception {
+        QueryWrapper<NoticeMsg> qw = new QueryWrapper<>();
+        qw.eq("unid",unid);
+        return super.remove(qw);
     }
 
     @Override

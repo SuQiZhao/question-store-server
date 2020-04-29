@@ -41,11 +41,11 @@ public interface NoticeMsgService extends BaseService<NoticeMsg> {
     /**
      * 删除
      *
-     * @param id
+     * @param unid
      * @return
      * @throws Exception
      */
-    boolean deleteNoticeMsg(Long id) throws Exception;
+    boolean deleteNoticeMsg(String unid) throws Exception;
 
     /**
      * 根据ID获取查询对象

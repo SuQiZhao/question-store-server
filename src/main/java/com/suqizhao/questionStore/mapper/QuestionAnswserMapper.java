@@ -51,5 +51,7 @@ public interface QuestionAnswserMapper extends BaseMapper<QuestionAnswser> {
     Page<QuestionAnswserQueryVo> findAnswserPage(@Param("page") Page page,
                                                   @Param("questionId") String questionId,
                                                   @Param("userId") String userId,
-                                                  @Param("isBest") String isBest);
+                                                  @Param("isBest") String isBest,
+                                                 @Param("questionTitle") String questionTitle,
+                                                 @Param("content") String content);
 }

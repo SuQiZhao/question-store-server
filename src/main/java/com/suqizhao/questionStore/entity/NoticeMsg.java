@@ -56,7 +56,6 @@ public class NoticeMsg extends BaseEntity {
     private String updateUsername;
 
     @ApiModelProperty("逻辑删除")
-    @TableLogic(value = "0",delval = "1")
     private Integer deleteFlag;
 
     @ApiModelProperty("通知标题")

@@ -84,7 +84,6 @@ public class User extends BaseEntity {
 
     @ApiModelProperty("逻辑删除：0：未删除，1：已删除，默认0")
     @NotNull(message = "逻辑删除：0：未删除，1：已删除，默认0不能为空")
-    @TableLogic(value = "0",delval = "1")
     private Integer deleteFlag;
 
     @ApiModelProperty("用户类型：1：用户、学生，2：教师，3：管理员")

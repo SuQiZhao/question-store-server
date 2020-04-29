@@ -64,10 +64,10 @@ public class NoticeMsgController extends BaseController {
     /**
      * 删除通知公告表
      */
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete")
     @ApiOperation(value = "删除NoticeMsg对象", notes = "删除通知公告表", response = ApiResult.class)
-    public ApiResult<Boolean> deleteNoticeMsg(@PathVariable("id") Long id) throws Exception {
-        boolean flag = noticeMsgService.deleteNoticeMsg(id);
+    public ApiResult<Boolean> deleteNoticeMsg(@ApiParam(required = true, name = "unid", value = "唯一编号") @RequestParam(value = "unid", required = true, defaultValue = "") String unid) throws Exception {
+        boolean flag = noticeMsgService.deleteNoticeMsg(unid);
         return ApiResult.result(flag);
     }
 

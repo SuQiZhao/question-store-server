@@ -21,11 +21,19 @@
 
     <select id="findAnswserPage" resultType="com.suqizhao.questionStore.vo.QuestionAnswserQueryVo">
         SELECT
-        *
+        qa.*,
+        qi.question_title
         FROM
-        question_answser
-        WHERE
-        DELETE_FLAG = 0
+        question_answser qa
+        LEFT JOIN question_info qi
+        ON qa.question_id = qi.cd_id
+        WHERE qa.DELETE_FLAG = 0
+        <if test="content != null and content != ''">
+            and content like CONCAT(CONCAT('%',#{content}), '%')
+        </if>
+        <if test="questionTitle != null and questionTitle != ''">
+            and question_title like CONCAT(CONCAT('%',#{questionTitle}), '%')
+        </if>
         <if test="questionId != null and questionId != ''">
             and question_id = #{questionId}
         </if>

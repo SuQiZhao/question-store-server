@@ -64,5 +64,5 @@ public interface QuestionAnswserService extends BaseService<QuestionAnswser> {
      */
     Paging<QuestionAnswserQueryVo> getQuestionAnswserPageList(QuestionAnswserPageParam questionAnswserPageParam) throws Exception;
 
-    Page<QuestionAnswserQueryVo> findAnswserPage(Long size, Long current, String questionId, String userId, String isBest);
+    Page<QuestionAnswserQueryVo> findAnswserPage(Long size, Long current, String questionId, String userId, String isBest,String questionTitle,String content);
 }
