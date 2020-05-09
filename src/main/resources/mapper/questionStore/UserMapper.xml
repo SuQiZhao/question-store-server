@@ -19,4 +19,31 @@
         from user
     </select>
 
+
+    <select id="findUserPage" resultType="com.suqizhao.questionStore.vo.UserQueryVo">
+        SELECT
+        *
+        FROM user
+        WHERE delete_flag = 0
+        <if test="username != null and username != ''">
+            and username like CONCAT(CONCAT('%',#{username}), '%')
+        </if>
+        <if test="nickname != null and nickname != ''">
+            and nickname like CONCAT(CONCAT('%',#{nickname}), '%')
+        </if>
+        <if test="collageName != null and collageName != ''">
+            and collage_name like CONCAT(CONCAT('%',#{collageName}), '%')
+        </if>
+        <if test="startDate != null">
+            <![CDATA[
+                AND create_time >= #{startDate}
+             ]]>
+        </if>
+        <if test="endDate != null">
+            <![CDATA[
+              AND create_time <= #{endDate}
+           ]]>
+        </if>
+        order by create_time desc
+    </select>
 </mapper>

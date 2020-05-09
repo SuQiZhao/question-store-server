@@ -103,8 +103,10 @@ public class QuestionAnswserController extends BaseController {
                                                             @ApiParam(required = false, name = "userId", value = "用户ID") @RequestParam(value = "userId", required = false,defaultValue = "") String userId,
                                                             @ApiParam(required = false, name = "isBest", value = "题目状态") @RequestParam(value = "isBest", required = false,defaultValue = "") String isBest,
                                                               @ApiParam(required = false, name = "questionTitle", value = "题目标题") @RequestParam(value = "questionTitle", required = false,defaultValue = "") String questionTitle,
-                                                              @ApiParam(required = false, name = "content", value = "回答内容") @RequestParam(value = "content", required = false,defaultValue = "") String content) throws Exception {
-        Page<QuestionAnswserQueryVo> paging = questionAnswserService.findAnswserPage(size,current,questionId,userId,isBest,questionTitle,content);
+                                                              @ApiParam(required = false, name = "content", value = "回答内容") @RequestParam(value = "content", required = false,defaultValue = "") String content,
+                                                              @ApiParam(required = false, name = "startDate", value = "开始日期") @RequestParam(value = "startDate", required = false,defaultValue = "") Date startDate,
+                                                              @ApiParam(required = false, name = "endDate", value = "结束日期") @RequestParam(value = "endDate", required = false,defaultValue = "") Date endDate) throws Exception {
+        Page<QuestionAnswserQueryVo> paging = questionAnswserService.findAnswserPage(size,current,questionId,userId,isBest,questionTitle,content,startDate,endDate);
         return ApiResult.ok(paging);
     }
 

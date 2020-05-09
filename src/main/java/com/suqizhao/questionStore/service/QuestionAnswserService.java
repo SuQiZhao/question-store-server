@@ -8,6 +8,7 @@ import com.suqizhao.questionStore.param.QuestionAnswserPageParam;
 import com.suqizhao.questionStore.vo.QuestionAnswserQueryVo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <pre>
@@ -64,5 +65,5 @@ public interface QuestionAnswserService extends BaseService<QuestionAnswser> {
      */
     Paging<QuestionAnswserQueryVo> getQuestionAnswserPageList(QuestionAnswserPageParam questionAnswserPageParam) throws Exception;
 
-    Page<QuestionAnswserQueryVo> findAnswserPage(Long size, Long current, String questionId, String userId, String isBest,String questionTitle,String content);
+    Page<QuestionAnswserQueryVo> findAnswserPage(Long size, Long current, String questionId, String userId, String isBest, String questionTitle, String content, Date startDate, Date endDate);
 }

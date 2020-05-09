@@ -100,7 +100,7 @@ public class QuestionInfoServiceImpl extends BaseServiceImpl<QuestionInfoMapper,
     public int getAllNotResolveQuestionCount() {
         QueryWrapper<QuestionInfo> qw = new QueryWrapper<>();
         qw.eq("delete_flag",0);
-        qw.eq("is_resolve",0).or().isNull("is_resolve");
+        qw.eq("is_resolve",0);
         return questionInfoMapper.selectCount(qw);
     }
 

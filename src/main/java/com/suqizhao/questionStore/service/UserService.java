@@ -1,5 +1,6 @@
 package com.suqizhao.questionStore.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.suqizhao.questionStore.entity.User;
 import com.suqizhao.framework.common.service.BaseService;
 import com.suqizhao.framework.pagination.Paging;
@@ -7,6 +8,7 @@ import com.suqizhao.questionStore.param.UserPageParam;
 import com.suqizhao.questionStore.vo.UserQueryVo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <pre>
@@ -64,4 +66,6 @@ public interface UserService extends BaseService<User> {
     Paging<UserQueryVo> getUserPageList(UserPageParam userPageParam) throws Exception;
 
     User getUserByUsername(String username) throws Exception;
+
+    Page<UserQueryVo> findUserPage(Long size, Long current, String username, String nickname, String collageName, Date startDate, Date endDate);
 }

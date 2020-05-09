@@ -21,6 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -47,6 +48,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean updateUser(User user) throws Exception {
+        Date currentTime = new Date();
+        user.setUpdatedTime(currentTime);
         return super.updateById(user);
     }
 
@@ -72,6 +75,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     public User getUserByUsername(String username) throws Exception {
         User user = new User().setUsername(username);
         return userMapper.selectOne(new QueryWrapper(user));
+    }
+
+    @Override
+    public Page<UserQueryVo> findUserPage(Long size, Long current, String username, String nickname, String collageName, Date startDate, Date endDate) {
+        Page page = new Page(current,size);
+        Page<UserQueryVo> userQueryVoPage =userMapper.findUserPage(page,username,nickname,collageName,startDate,endDate);
+        return userQueryVoPage;
     }
 
 

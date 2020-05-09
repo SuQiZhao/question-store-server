@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <pre>
@@ -53,5 +54,7 @@ public interface QuestionAnswserMapper extends BaseMapper<QuestionAnswser> {
                                                   @Param("userId") String userId,
                                                   @Param("isBest") String isBest,
                                                  @Param("questionTitle") String questionTitle,
-                                                 @Param("content") String content);
+                                                 @Param("content") String content,
+                                                 @Param("startDate") Date startDate,
+                                                 @Param("endDate") Date endDate);
 }

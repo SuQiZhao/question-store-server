@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <pre>
@@ -40,4 +41,5 @@ public interface UserMapper extends BaseMapper<User> {
      */
     IPage<UserQueryVo> getUserPageList(@Param("page") Page page, @Param("param") UserPageParam userPageParam);
 
+    Page<UserQueryVo> findUserPage(@Param("page") Page page, @Param("username") String username, @Param("nickname") String nickname, @Param("collageName") String collageName,@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

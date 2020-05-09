@@ -1,5 +1,6 @@
 package com.suqizhao.questionStore.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.suqizhao.questionStore.entity.User;
 import com.suqizhao.questionStore.service.UserService;
 import com.suqizhao.framework.pagination.Paging;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
 import com.suqizhao.framework.common.param.IdParam;
+
+import java.util.Date;
 
 /**
  * <pre>
@@ -88,5 +91,17 @@ public class UserController extends BaseController {
         return ApiResult.ok(paging);
     }
 
+    @GetMapping("/findUserPage")
+    @ApiOperation(value = "根据条件获取用户分页接口", notes = "根据条件获取用户分页接口",response = UserQueryVo.class)
+    public ApiResult<Paging<UserQueryVo>> findUserPage(@ApiParam(required = true, name = "current", value = "当前页") @RequestParam(value = "current", required = true, defaultValue = "1") Long current,
+                                                            @ApiParam(required = true, name = "size", value = "分页大小") @RequestParam(value = "size", required = true, defaultValue = "10") Long size,
+                                                            @ApiParam(required = false, name = "username", value = "用户名") @RequestParam(value = "username", required = false,defaultValue = "") String username,
+                                                            @ApiParam(required = false, name = "nickname", value = "用户昵称") @RequestParam(value = "nickname", required = false,defaultValue = "") String nickname,
+                                                            @ApiParam(required = false, name = "collageName", value = "学校名称") @RequestParam(value = "collageName", required = false,defaultValue = "") String collageName,
+                                                       @ApiParam(required = false, name = "startDate", value = "开始日期") @RequestParam(value = "startDate", required = false,defaultValue = "") Date startDate,
+                                                       @ApiParam(required = false, name = "endDate", value = "结束日期") @RequestParam(value = "endDate", required = false,defaultValue = "") Date endDate) throws Exception {
+        Page<UserQueryVo> paging = userService.findUserPage(size,current,username,nickname,collageName,startDate,endDate);
+        return ApiResult.ok(paging);
+    }
 }
 
