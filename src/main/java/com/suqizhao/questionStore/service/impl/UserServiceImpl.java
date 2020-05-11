@@ -42,6 +42,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean saveUser(User user) throws Exception {
+        Date currentTime = new Date();
+        user.setCreateTime(currentTime);
         return super.save(user);
     }
 

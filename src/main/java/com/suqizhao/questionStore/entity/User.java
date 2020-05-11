@@ -2,8 +2,6 @@ package com.suqizhao.questionStore.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.suqizhao.framework.common.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -23,7 +21,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
  * </pre>
  *
  * @author sqizhao
- * @since 2020-04-08
+ * @since 2020-05-11
  */
 @Data
 @Accessors(chain = true)
@@ -57,11 +55,9 @@ public class User extends BaseEntity {
     private String majorName;
 
     @ApiModelProperty("邮箱")
-    @NotBlank(message = "邮箱不能为空")
     private String email;
 
     @ApiModelProperty("手机号码")
-    @NotBlank(message = "手机号码不能为空")
     private String telephone;
 
     @ApiModelProperty("性别：0：女，1：男，默认1")
@@ -72,11 +68,9 @@ public class User extends BaseEntity {
     private Integer status;
 
     @ApiModelProperty("创建时间")
-    @NotNull(message = "创建时间不能为空")
     private Date createTime;
 
     @ApiModelProperty("更改时间")
-    @NotNull(message = "更改时间不能为空")
     private Date updatedTime;
 
     @ApiModelProperty("登陆时间")
