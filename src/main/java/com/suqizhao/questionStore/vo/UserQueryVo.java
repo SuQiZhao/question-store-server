@@ -50,9 +50,6 @@ public class UserQueryVo implements Serializable {
     @ApiModelProperty("性别：0：女，1：男，默认1")
     private Integer gender;
 
-    @ApiModelProperty("状态：0：启用，1：禁用）")
-    private Integer status;
-
     @ApiModelProperty("创建时间")
     private Date createTime;
 
@@ -70,5 +67,14 @@ public class UserQueryVo implements Serializable {
 
     @ApiModelProperty("盐值")
     private String salt;
+
+    @ApiModelProperty("状态：0：启用，1：禁用")
+    private Integer status;
+
+    @ApiModelProperty("头像")
+    private String profile;
+
+    @ApiModelProperty("地区")
+    private String area;
 
 }
