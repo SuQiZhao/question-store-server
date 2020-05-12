@@ -54,7 +54,7 @@ public interface NoticeMsgService extends BaseService<NoticeMsg> {
      * @return
      * @throws Exception
      */
-    NoticeMsgQueryVo getNoticeMsgById(Serializable id) throws Exception;
+    NoticeMsg getNoticeMsgById(Serializable unid) throws Exception;
 
     /**
      * 获取分页对象

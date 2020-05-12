@@ -74,11 +74,11 @@ public class NoticeMsgController extends BaseController {
     /**
      * 获取通知公告表
      */
-    @GetMapping("/info/{id}")
+    @GetMapping("/info")
     @ApiOperation(value = "获取NoticeMsg对象详情", notes = "查看通知公告表", response = NoticeMsgQueryVo.class)
-    public ApiResult<NoticeMsgQueryVo> getNoticeMsg(@PathVariable("id") Long id) throws Exception {
-        NoticeMsgQueryVo noticeMsgQueryVo = noticeMsgService.getNoticeMsgById(id);
-        return ApiResult.ok(noticeMsgQueryVo);
+    public ApiResult<NoticeMsgQueryVo> getNoticeMsg(@ApiParam(required = true, name = "unid", value = "唯一编码") @RequestParam(value = "unid", required = true) String unid) throws Exception {
+        NoticeMsg noticeMsg = noticeMsgService.getNoticeMsgById(unid);
+        return ApiResult.ok(noticeMsg);
     }
 
     /**

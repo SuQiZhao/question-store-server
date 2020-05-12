@@ -51,7 +51,6 @@ public class User extends BaseEntity {
     private String collageName;
 
     @ApiModelProperty("所属专业")
-    @NotBlank(message = "所属专业不能为空")
     private String majorName;
 
     @ApiModelProperty("邮箱")

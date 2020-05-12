@@ -65,8 +65,9 @@ public class NoticeMsgServiceImpl extends BaseServiceImpl<NoticeMsgMapper, Notic
     }
 
     @Override
-    public NoticeMsgQueryVo getNoticeMsgById(Serializable id) throws Exception {
-        return noticeMsgMapper.getNoticeMsgById(id);
+    public NoticeMsg getNoticeMsgById(Serializable unid) throws Exception {
+        QueryWrapper<NoticeMsg> qw = new QueryWrapper<>();
+        return noticeMsgMapper.selectById(unid);
     }
 
     @Override
